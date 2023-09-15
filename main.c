@@ -31,32 +31,32 @@ int main()
     
     while(1) {
       if(LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_0))
-			{
-				LL_GPIO_ResetOutputPin(GPIOC, LL_GPIO_PIN_3);// User button pressed turn on LEDS
-        LL_GPIO_SetOutputPin(GPIOC, LL_GPIO_PIN_0);// User button pressed turn off LEDS						    
-        Display_Button(2);//Display button 
-		  }
+      {
+	 LL_GPIO_ResetOutputPin(GPIOC, LL_GPIO_PIN_3);// User button pressed turn on LEDS
+         LL_GPIO_SetOutputPin(GPIOC, LL_GPIO_PIN_0);// User button pressed turn off LEDS						    
+         Display_Button(2);//Display button 
+      }
 			
-			else if(LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_4))
-			{			
-				LL_GPIO_ResetOutputPin(GPIOC, LL_GPIO_PIN_3);// User button pressed turn on LEDS
-        LL_GPIO_SetOutputPin(GPIOC, LL_GPIO_PIN_0);// User button pressed turn off LEDS								    
-        Display_Button(1);//Display button 
-		  }
+      else if(LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_4))
+      {			
+	 LL_GPIO_ResetOutputPin(GPIOC, LL_GPIO_PIN_3);// User button pressed turn on LEDS
+         LL_GPIO_SetOutputPin(GPIOC, LL_GPIO_PIN_0);// User button pressed turn off LEDS								    
+         Display_Button(1);//Display button 
+      }
 			
-			else if(LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_5))
-			{
+      else if(LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_5))
+      {
 				LL_GPIO_ResetOutputPin(GPIOC, LL_GPIO_PIN_3);// User button pressed turn on LEDS
         LL_GPIO_SetOutputPin(GPIOC, LL_GPIO_PIN_0);// User button pressed turn off LEDS						   
         Display_Button(0);//Display button 
-		  }
+      }
 			
-			else
-			{
-				LL_GPIO_SetOutputPin(GPIOC, LL_GPIO_PIN_3);;// User button pressed turn off LEDS	
-				LL_GPIO_ResetOutputPin(GPIOC, LL_GPIO_PIN_0);// User button pressed turn on LEDS	
-				LCD_GLASS_DisplayString((uint8_t*)disp2_str);//display string LD : CLEAR
-			}	
+      else
+      {
+	 LL_GPIO_SetOutputPin(GPIOC, LL_GPIO_PIN_3);;// User button pressed turn off LEDS	
+	 LL_GPIO_ResetOutputPin(GPIOC, LL_GPIO_PIN_0);// User button pressed turn on LEDS	
+	 LCD_GLASS_DisplayString((uint8_t*)disp2_str);//display string LD : CLEAR
+      }	
     }
 }
 
@@ -80,20 +80,19 @@ void Display_Button(int a)
              LCD_GLASS_Clear();
 						 
 		while (seconds2 > 0) {
-							 if (LL_TIM_IsActiveFlag_UPDATE(TIM2) != RESET) {
-									// Print the countdown value on the LCD for 10 seconds
-								  if (seconds2 < 10) {
-											sprintf(disp_str, "0%d", seconds2);
-                  } 
-								  else {
-									 		sprintf(disp_str, "%d", seconds2);
-								  }
-								  LCD_GLASS_DisplayString((uint8_t*)disp_str);
-									
-								  seconds2--; // Reduce the countdown by 1 second
-									LL_TIM_ClearFlag_UPDATE(TIM2);
-                  }
-    }
+			 if (LL_TIM_IsActiveFlag_UPDATE(TIM2) != RESET) {
+			     // Print the countdown value on the LCD for 10 seconds
+			     if (seconds2 < 10) {
+			         sprintf(disp_str, "0%d", seconds2);
+			     }
+			     else {
+				  sprintf(disp_str, "%d", seconds2);
+			     }
+			     LCD_GLASS_DisplayString((uint8_t*)disp_str);					
+			     seconds2--; // Reduce the countdown by 1 second
+			     LL_TIM_ClearFlag_UPDATE(TIM2);
+                         }
+                }
 }		
 
 void GPIO_Config(void)
@@ -110,14 +109,14 @@ void GPIO_Config(void)
     // Config GPIOA using struct
     GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
     GPIO_InitStruct.Pin = LL_GPIO_PIN_3;
-	  GPIO_InitStruct.Pin = LL_GPIO_PIN_4;
-	  GPIO_InitStruct.Pin = LL_GPIO_PIN_5;
+    GPIO_InitStruct.Pin = LL_GPIO_PIN_4;
+    GPIO_InitStruct.Pin = LL_GPIO_PIN_5;
     GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
     LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 		
 		// Config GPIOC using struct 
     GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
-    GPIO_InitStruct.Pin = LL_GPIO_PIN_0 | LL_GPIO_PIN_3 | LL_GPIO_PIN_10; 
+    GPIO_InitStruct.Pin = LL_GPIO_PIN_0 | LL_GPIO_PIN_3 ; 
     GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
     LL_GPIO_Init(GPIOC, &GPIO_InitStruct); 
 }
