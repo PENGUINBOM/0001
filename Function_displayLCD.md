@@ -1,4 +1,9 @@
 # 0001
+
+char disp2_str[] ="CLEAR "; // declare string LD : CLEAR
+char disp_str[10];// declare count down
+char *disp_strE[4] = { "SMOKE ", "CO2  ", "LPG  "};
+
 void Display_Button(int a)
 {
 	 int seconds = 10;
